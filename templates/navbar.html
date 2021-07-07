@@ -1,0 +1,70 @@
+{% load cart_tag %}
+<div class="sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'App_Shop:home' %}">E-Shop | Computers</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
+                    class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="form-inline ml-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Components</a>
+                        <div class="dropdown-menu" aria-labelledby="nabbarDropdown">
+                            <a class="dropdown-item" href="/">Processor</a>
+                            <a class="dropdown-item" href="/">Graphics Card</a>
+                            <a class="dropdown-item" href="/">Monitor</a>
+                            <a class="dropdown-item" href="/">RAM</a>
+                            <a class="dropdown-item" href="/">Motherboard</a>
+                            <a class="dropdown-item" href="/">Casing</a>
+                            <a class="dropdown-item" href="/">Keyboard</a>
+                            <a class="dropdown-item" href="/">Mouse</a>
+                            <a class="dropdown-item" href="/">SSD</a>
+                            <a class="dropdown-item" href="/">HDD</a>
+                            <a class="dropdown-item" href="/">Power Supply</a>
+                            <a class="dropdown-item" href="/">CPU Cooler</a>
+                            <a class="dropdown-item" href="/">UPS</a>
+                            <a class="dropdown-item" href="/">Headset</a>
+                        </div>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'App_Order:cart' %}" class="nav-link">
+                            <i class="fa fa-shopping-cart"></i> Cart
+                            <span class="badge badge-light">{{ request.user | cart_total }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                class="fas fa-user-tie"></i> {{request.user.profile.username}}</a>
+                        <div class="dropdown-menu" aria-labelledby="nabbarDropdown">
+                            <a class="dropdown-item" href="{% url 'App_Login:profile' %}">Profile</a>
+                            <a class="dropdown-item" href="{% url 'App_Payment:orders' %}">Orders</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'App_Login:logout' %}">Logout</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'App_Login:login' %}" class="btn btn-primary btn-sm px-3 mx-3">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'App_Login:signup' %}" class="btn btn-success btn-sm">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
